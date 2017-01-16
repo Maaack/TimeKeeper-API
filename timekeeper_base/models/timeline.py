@@ -105,6 +105,25 @@ class Element(Perspective):
         ordering = ["-created"]
 
 
+class Actor(Element):
+    class Meta:
+        verbose_name = _("Actor")
+        verbose_name_plural = _("Actors")
+        ordering = ["-created"]
+
+    type = models.CharField(_("Actor Type"), max_length=25, default='character')
+
+
+class Product(Element):
+    class Meta:
+        verbose_name = _("Product")
+        verbose_name_plural = _("Products")
+        ordering = ["-created"]
+
+    elements = models.ManyToManyField('Element', related_name='parent_products')
+    type = models.CharField(_("Product Type"), max_length=25, default='interaction')
+
+
 class RelativePosition(BaseModel, RawTitle):
     class Meta:
         verbose_name = _("Relative Position")
@@ -124,20 +143,3 @@ class Alias(BaseModel, RawTitle):
     actor = models.ForeignKey('Actor')
 
 
-class Actor(Element):
-    class Meta:
-        verbose_name = _("Actor")
-        verbose_name_plural = _("Actors")
-        ordering = ["-created"]
-
-    type = models.CharField(_("Actor Type"), max_length=25, default='character')
-
-
-class Product(Element):
-    class Meta:
-        verbose_name = _("Product")
-        verbose_name_plural = _("Products")
-        ordering = ["-created"]
-
-    elements = models.ManyToManyField('Element', related_name='parent_products')
-    type = models.CharField(_("Product Type"), max_length=25, default='interaction')
