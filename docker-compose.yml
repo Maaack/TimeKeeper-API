@@ -2,6 +2,8 @@ version: '2'
 services:
   db:
     image: postgres
+    volumes:
+      - ./datavolume:/var/lib/postgresql
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
