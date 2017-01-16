@@ -56,12 +56,29 @@ class RawTitle(models.Model):
         abstract = True
 
     raw_title = models.CharField(_("Raw Title"), max_length=100)
-    title = models.CharField(_("Title"), max_length=100)
+    title = models.CharField(_("Title"), max_length=100, blank=True, null=True, default='')
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        self.title = self.raw_title.strip().capitalize()
+        return super(RawTitle, self).save(*args, **kwargs)
 
 
 class RawText(models.Model):
     class Meta:
         abstract = True
 
-    raw_text = models.TextField(_("Raw Title"))
-    text = models.TextField(_("Title"))
+    raw_text = models.TextField(_("Raw Text"))
+    text = models.TextField(_("Text"), blank=True, null=True, default='')
+    snippet = models.CharField(_("Snippet"), max_length=25, blank=True, null=True, default='')
+
+    def __str__(self):
+        return self.snippet
+
+    def save(self, *args, **kwargs):
+        self.text = self.raw_text.strip().capitalize()
+        self.snippet = self.text[:25]
+        return super(RawText, self).save(*args, **kwargs)
+

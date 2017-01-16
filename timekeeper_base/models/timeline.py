@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from api.mixins.models import *
 
@@ -29,6 +29,9 @@ class Time(BaseModel):
 
     interval_type = models.CharField(_("Interval Type"), max_length=20, default="moment")
     interval_duration = models.FloatField(_("Interval Duration"), default=1.0)
+
+    def __str__(self):
+        return self.interval_type + " " + str(self.id)
 
 
 class TimeLink(BaseModel):
