@@ -57,7 +57,18 @@ class TimeKeeper(BaseModel):
         ordering = ["-created"]
         default_related_name = 'time_keepers'
 
-    timeline = models.ForeignKey('Timeline')
+    timeline = models.ForeignKey('Timeline', blank=True)
+
+    def save(self, *args, **kwargs):
+        try:
+            self.timeline
+        except Timeline.DoesNotExist:
+            self.timeline = Timeline.objects.create()
+            if 'raw_title' in kwargs:
+                self.timeline.raw_title = kwargs['raw_title'] + ' Timeline'
+            self.timeline.save()
+        del(kwargs['raw_title'])
+        return super(TimeKeeper, self).save(*args, **kwargs)
 
 
 class EventRule(BaseModel, RawText):
@@ -80,6 +91,7 @@ class Event(BaseModel, RawText):
         default_related_name = 'events'
 
     event_rule = models.ForeignKey('EventRule', blank=True, null=True)
+    perspectives = models.ManyToManyField('Perspective')
     time = models.ForeignKey('Time')
     place = models.ForeignKey('RelativePosition', blank=True, null=True)
     action = models.ForeignKey('Action', blank=True, null=True)
@@ -109,6 +121,10 @@ class Perspective(TimeKeeper, RawTitle):
         verbose_name_plural = _("Perspectives")
         ordering = ["-created"]
 
+    def save(self, *args, **kwargs):
+        kwargs['raw_title'] = self.raw_title
+        return super(Perspective, self).save(*args, **kwargs)
+
 
 class Element(Perspective):
     class Meta:
@@ -126,14 +142,15 @@ class Actor(Element):
     type = models.CharField(_("Actor Type"), max_length=25, default='character')
 
 
-class Product(Element):
+class Set(Element):
     class Meta:
-        verbose_name = _("Product")
-        verbose_name_plural = _("Products")
+        verbose_name = _("Set")
+        verbose_name_plural = _("Sets")
         ordering = ["-created"]
 
-    elements = models.ManyToManyField('Element', related_name='parent_products')
-    type = models.CharField(_("Product Type"), max_length=25, default='interaction')
+    type = models.CharField(_("Set Type"), max_length=25, default='interaction')
+    method = models.CharField(_("Set Method"), help_text=_("Union or Intersection"), max_length=1, default='I')
+    actors = models.ManyToManyField('Actor', related_name='parent_products')
 
 
 class RelativePosition(BaseModel, RawTitle):
@@ -154,6 +171,6 @@ class Alias(BaseModel, RawTitle):
         ordering = ["-created"]
         default_related_name = 'aliases'
 
-    actor = models.ForeignKey('Actor')
-
+    element = models.ForeignKey('Element')
+    type = models.CharField(_("Alias Type"), max_length=25, default='')
 

@@ -10,7 +10,7 @@ from . import (Timeline,
                Perspective,
                Element,
                Actor,
-               Product,
+               Set,
                RelativePosition,
                Alias)
 
@@ -77,3 +77,58 @@ class EventSerializer(BaseModelSerializer):
                   'event_rule', 'time', 'place', 'action')
 
 
+class ActionSerializer(BaseModelSerializer):
+    class Meta:
+        model = Action
+        fields = ('id', 'created', 'updated', 'user',
+                  'actors', 'activity')
+
+
+class ActivitySerializer(BaseModelSerializer):
+    class Meta:
+        model = Activity
+        fields = ('id', 'created', 'updated', 'user', 'raw_text', 'text')
+
+
+class PerspectiveSerializer(TimeKeeperSerializer):
+    class Meta:
+        model = Perspective
+        fields = ('id', 'created', 'updated', 'user', 'raw_title', 'title',
+                  'timeline')
+
+
+class ElementSerializer(PerspectiveSerializer):
+    class Meta:
+        model = Element
+        fields = ('id', 'created', 'updated', 'user', 'raw_title', 'title',
+                  'aliases', 'timeline')
+
+    aliases = serializers.HyperlinkedRelatedField(many=True, view_name='alias-detail', read_only=True)
+
+
+class ActorSerializer(ElementSerializer):
+    class Meta:
+        model = Actor
+        fields = ('id', 'created', 'updated', 'user', 'raw_title', 'title',
+                  'type', 'aliases', 'timeline')
+
+
+class SetSerializer(ElementSerializer):
+    class Meta:
+        model = Set
+        fields = ('id', 'created', 'updated', 'user', 'raw_title', 'title',
+                  'type', 'method', 'actors', 'aliases', 'timeline')
+
+
+class RelativePositionSerializer(BaseModelSerializer):
+    class Meta:
+        model = RelativePosition
+        fields = ('id', 'created', 'updated', 'user', 'raw_title', 'title',
+                  'type', 'method', 'actors', 'aliases')
+
+
+class AliasPositionSerializer(BaseModelSerializer):
+    class Meta:
+        model = Alias
+        fields = ('id', 'created', 'updated', 'user', 'raw_title', 'title',
+                  'element', 'type')

@@ -12,7 +12,7 @@ from .models import (Timeline,
                      Perspective,
                      Element,
                      Actor,
-                     Product,
+                     Set,
                      RelativePosition,
                      Alias)
 
@@ -28,6 +28,6 @@ admin.site.register(Activity)
 admin.site.register(Perspective)
 admin.site.register(Element)
 admin.site.register(Actor)
-admin.site.register(Product)
+admin.site.register(Set)
 admin.site.register(RelativePosition)
 admin.site.register(Alias)

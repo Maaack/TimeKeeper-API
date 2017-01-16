@@ -32,3 +32,45 @@ class TimeKeeperViewSet(BaseViewSet):
 class EventViewSet(BaseViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+
+class ActionViewSet(BaseViewSet):
+    queryset = Action.objects.all()
+    serializer_class = ActionSerializer
+
+
+class ActivityViewSet(BaseViewSet):
+    queryset = Activity.objects.all()
+    serializer_class = ActivitySerializer
+
+
+class PerspectiveViewSet(BaseViewSet):
+    queryset = Perspective.objects.all()
+    serializer_class = PerspectiveSerializer
+
+
+class ElementViewSet(BaseViewSet):
+    queryset = Element.objects.all()
+    serializer_class = ElementSerializer
+
+
+class ActorViewSet(BaseViewSet):
+    queryset = Actor.objects.all()
+    serializer_class = ActorSerializer
+
+
+class SetViewSet(BaseViewSet):
+    queryset = Set.objects.all()
+    serializer_class = SetSerializer
+
+
+class RelativePositionViewSet(BaseViewSet):
+    queryset = RelativePosition.objects.all()
+    serializer_class = RelativePositionSerializer
+
+
+class AliasViewSet(BaseViewSet):
+    queryset = Alias.objects.all()
+    serializer_class = AliasPositionSerializer
+
+
