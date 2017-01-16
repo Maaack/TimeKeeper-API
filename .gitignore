@@ -1,0 +1,5 @@
+# gitignore files
+/.idea
+Dockerfile~
+api/__pycache__/
+api/settings.py
