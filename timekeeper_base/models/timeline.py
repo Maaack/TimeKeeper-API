@@ -49,6 +49,17 @@ class TimeLink(BaseModel):
     def __str__(self):
         return self.timeline.title[:25] + ' :: ' + str(self.time)
 
+    def save(self, *args, **kwargs):
+        from django.db.models import F
+        if self.order is None or not self.order:
+            last_time = self.timeline.time_links.order_by('-order').first()
+            self.order = last_time.order + 1
+        else:
+            conflicting_time = self.timeline.time_links.filter(order=self.order).exists()
+            if conflicting_time:
+                self.timeline.time_links.filter(order__gte=self.order).update(order=F('order') + 1)
+        return super(TimeLink, self).save(*args, **kwargs)
+
 
 class TimeKeeper(BaseModel):
     class Meta:
@@ -64,10 +75,12 @@ class TimeKeeper(BaseModel):
             self.timeline
         except Timeline.DoesNotExist:
             self.timeline = Timeline.objects.create()
-            if 'raw_title' in kwargs:
-                self.timeline.raw_title = kwargs['raw_title'] + ' Timeline'
-            self.timeline.save()
-        del(kwargs['raw_title'])
+            try:
+                if self.raw_title:
+                    self.timeline.raw_title = self.raw_title + ' Timeline'
+                self.timeline.save()
+            except AttributeError:
+                pass
         return super(TimeKeeper, self).save(*args, **kwargs)
 
 
@@ -120,10 +133,6 @@ class Perspective(TimeKeeper, RawTitle):
         verbose_name = _("Perspective")
         verbose_name_plural = _("Perspectives")
         ordering = ["-created"]
-
-    def save(self, *args, **kwargs):
-        kwargs['raw_title'] = self.raw_title
-        return super(Perspective, self).save(*args, **kwargs)
 
 
 class Element(Perspective):

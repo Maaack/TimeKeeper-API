@@ -57,17 +57,12 @@ class TimeLinkSerializer(BaseModelSerializer):
         fields = ('id', 'created', 'updated', 'user',
                   'order', 'timeline', 'time')
 
-    time = serializers.HyperlinkedRelatedField(view_name='time-detail', read_only=True)
-    timeline = serializers.HyperlinkedRelatedField(view_name='timeline-detail', read_only=True)
-
 
 class TimeKeeperSerializer(BaseModelSerializer):
     class Meta:
         model = TimeKeeper
         fields = ('id', 'created', 'updated', 'user',
                   'timeline')
-
-    timeline = serializers.HyperlinkedRelatedField(view_name='timeline-detail', read_only=True)
 
 
 class EventSerializer(BaseModelSerializer):
