@@ -13,6 +13,7 @@ class Timeline(BaseModel, RawTitle):
         verbose_name = _('Timeline')
         verbose_name_plural = _('Timelines')
         ordering = ["-created"]
+        default_related_name = 'timelines'
 
     times = models.ManyToManyField(
         'Time',
@@ -39,10 +40,14 @@ class TimeLink(BaseModel):
         verbose_name = _("Time Link")
         verbose_name_plural = _("Time Links")
         ordering = ["-created"]
+        default_related_name = 'time_links'
 
     timeline = models.ForeignKey('Timeline')
     time = models.ForeignKey('Time')
     order = models.IntegerField(_("Order"), default=0)
+
+    def __str__(self):
+        return self.timeline.title[:25] + ' :: ' + str(self.time)
 
 
 class TimeKeeper(BaseModel):
@@ -50,6 +55,7 @@ class TimeKeeper(BaseModel):
         verbose_name = _("Time Keeper")
         verbose_name_plural = _("Time Keepers")
         ordering = ["-created"]
+        default_related_name = 'time_keepers'
 
     timeline = models.ForeignKey('Timeline')
 
@@ -59,6 +65,7 @@ class EventRule(BaseModel, RawText):
         verbose_name = _("Event Rule")
         verbose_name_plural = _("Event Rules")
         ordering = ["-created"]
+        default_related_name = 'event_rules'
 
     original_time = models.ForeignKey('Time', null=True)
     repeats = models.BooleanField(_("Repeats"), default=False)
@@ -70,11 +77,12 @@ class Event(BaseModel, RawText):
         verbose_name = _("Event")
         verbose_name_plural = _("Events")
         ordering = ["-created"]
+        default_related_name = 'events'
 
-    event_rule = models.ForeignKey('EventRule')
+    event_rule = models.ForeignKey('EventRule', blank=True, null=True)
     time = models.ForeignKey('Time')
-    place = models.ForeignKey('RelativePosition')
-    action = models.ForeignKey('Action')
+    place = models.ForeignKey('RelativePosition', blank=True, null=True)
+    action = models.ForeignKey('Action', blank=True, null=True)
 
 
 class Action(BaseModel):
@@ -82,6 +90,7 @@ class Action(BaseModel):
         verbose_name = _("Action")
         verbose_name_plural = _("Actions")
         ordering = ["-created"]
+        default_related_name = 'actions'
 
     actors = models.ManyToManyField('Alias')
     activity = models.ForeignKey('Activity')
@@ -132,6 +141,7 @@ class RelativePosition(BaseModel, RawTitle):
         verbose_name = _("Relative Position")
         verbose_name_plural = _("Relative Positions")
         ordering = ["-created"]
+        default_related_name = 'relative_positions'
 
     type = models.CharField(_("Position Type"), max_length=25, default='')
     place = models.ForeignKey('Actor')
@@ -142,6 +152,7 @@ class Alias(BaseModel, RawTitle):
         verbose_name = _("Alias")
         verbose_name_plural = _("Aliases")
         ordering = ["-created"]
+        default_related_name = 'aliases'
 
     actor = models.ForeignKey('Actor')
 

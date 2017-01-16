@@ -39,7 +39,7 @@ class TimelineSerializer(BaseModelSerializer, RawTitleSerializer):
     class Meta:
         model = Timeline
         fields = ('id', 'created', 'updated', 'user', 'raw_title', 'title',
-                  'times')
+                  'times', 'time_links')
 
     times = serializers.HyperlinkedRelatedField(many=True, view_name='time-detail', read_only=True)
 
@@ -48,7 +48,7 @@ class TimeSerializer(BaseModelSerializer):
     class Meta:
         model = Time
         fields = ('id', 'created', 'updated', 'user',
-                  'interval_type', 'interval_duration')
+                  'interval_type', 'interval_duration', 'timelines', 'time_links', 'events')
 
 
 class TimeLinkSerializer(BaseModelSerializer):
@@ -68,5 +68,12 @@ class TimeKeeperSerializer(BaseModelSerializer):
                   'timeline')
 
     timeline = serializers.HyperlinkedRelatedField(view_name='timeline-detail', read_only=True)
+
+
+class EventSerializer(BaseModelSerializer):
+    class Meta:
+        model = Event
+        fields = ('id', 'created', 'updated', 'user', 'raw_text', 'text',
+                  'event_rule', 'time', 'place', 'action')
 
 

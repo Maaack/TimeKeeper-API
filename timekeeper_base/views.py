@@ -28,3 +28,7 @@ class TimeKeeperViewSet(BaseViewSet):
     queryset = TimeKeeper.objects.all()
     serializer_class = TimeKeeperSerializer
 
+
+class EventViewSet(BaseViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
