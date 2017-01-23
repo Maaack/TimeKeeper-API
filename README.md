@@ -10,7 +10,7 @@ Store and retrieve timeline data and relationships between time, events, and act
 You'll need to run migrations on the database to get it caught up.
 (If you'd like to have docker do this automagically - by all means)
 ```
-$> sudo docker exec -it timekeeper_web_1 /bin/bash
+$> sudo docker exec -it timekeeperapi_web_1 /bin/bash
 timekeeper_web_1$> python manage.py makemigrations
 timekeeper_web_1$> python manage.py migrate
 ```
@@ -20,7 +20,7 @@ Go to `http://localhost:8000/`
 # Structure
 Django-based REST API
 
-`timekeeper_base` has most of the meat. API is accessible in both readable HTML or JSON.
+`timelines` has most of the meat. API is accessible in both readable HTML or JSON.
 
 # Additional Resources
 Writing your first Django App Tutorials: https://docs.djangoproject.com/en/1.9/intro/tutorial01/

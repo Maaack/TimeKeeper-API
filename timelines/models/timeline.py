@@ -1,6 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 
-from api.mixins.models import *
+from timekeeperapi.mixins.models import *
 
 
 class BaseModel(TimeStamped, Ownable):
@@ -45,6 +45,7 @@ class TimeLink(BaseModel):
     timeline = models.ForeignKey('Timeline')
     time = models.ForeignKey('Time')
     order = models.IntegerField(_("Order"), default=0)
+    weight = models.FloatField(_("Weight"), default=1.0)
 
     def __str__(self):
         return self.timeline.title[:25] + ' :: ' + str(self.time)

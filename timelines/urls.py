@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from timekeeper_base import views
+from timelines import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()

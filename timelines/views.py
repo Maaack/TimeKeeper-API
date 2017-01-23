@@ -5,7 +5,7 @@ from .models.serializers import *
 
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
-from api.mixins.views import BaseViewSet
+from timekeeperapi.mixins.views import BaseViewSet
 
 
 # Create your views here.

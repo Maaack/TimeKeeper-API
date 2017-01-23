@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
-from api.utils import get_user_model_name
+from timekeeperapi.utils import get_user_model_name
 
 
 user_model_name = get_user_model_name()
