@@ -44,7 +44,7 @@ class TimeLink(BaseModel):
 
     timeline = models.ForeignKey('Timeline')
     time = models.ForeignKey('Time')
-    order = models.IntegerField(_("Order"), default=0)
+    order = models.IntegerField(_("Order"), default=0, db_index=True)
     weight = models.FloatField(_("Weight"), default=1.0)
 
     def __str__(self):
