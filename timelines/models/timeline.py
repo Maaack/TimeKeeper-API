@@ -44,7 +44,7 @@ class Timeline(BaseModel, RawTitle):
         ordering = ["-created"]
         default_related_name = 'timelines'
 
-    axis = models.ForeignKey('Axis', blank=True)
+    axis = models.ForeignKey('Axis', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         try:
@@ -61,4 +61,4 @@ class TimeKeeper(BaseModel):
         ordering = ["-created"]
         default_related_name = 'time_keepers'
 
-    timeline = models.ForeignKey('Timeline', blank=True)
+    timeline = models.ForeignKey('Timeline', blank=True, null=True)
