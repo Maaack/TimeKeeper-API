@@ -14,8 +14,8 @@ class Axis(BaseModel):
         verbose_name_plural = _("Axe")
         ordering = ["-created"]
 
-    maximum_position = models.ForeignKey("Position", related_name='+')
-    minimum_position = models.ForeignKey("Position", related_name='+')
+    maximum_position = models.ForeignKey("Position", models.SET_NULL, related_name='+', blank=True, null=True)
+    minimum_position = models.ForeignKey("Position", models.SET_NULL, related_name='+', blank=True, null=True)
 
 
 class Position(BaseModel, RawTitle):
@@ -25,7 +25,7 @@ class Position(BaseModel, RawTitle):
         ordering = ["-created"]
         default_related_name = 'positions'
 
-    axis = models.ForeignKey('Axis')
+    axis = models.ForeignKey('Axis', models.CASCADE)
     value = models.FloatField(_('Value'), default=0, db_index=True)
 
 class Note(BaseModel):
@@ -44,7 +44,7 @@ class Timeline(BaseModel, RawTitle):
         ordering = ["-created"]
         default_related_name = 'timelines'
 
-    axis = models.ForeignKey('Axis', blank=True, null=True)
+    axis = models.ForeignKey('Axis', models.SET_NULL, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         try:
@@ -61,4 +61,4 @@ class TimeKeeper(BaseModel):
         ordering = ["-created"]
         default_related_name = 'time_keepers'
 
-    timeline = models.ForeignKey('Timeline', blank=True, null=True)
+    timeline = models.ForeignKey('Timeline', models.SET_NULL, blank=True, null=True)
