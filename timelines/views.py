@@ -18,8 +18,3 @@ class TimelineViewSet(BaseViewSet):
 class TimeKeeperViewSet(BaseViewSet):
     queryset = TimeKeeper.objects.all()
     serializer_class = TimeKeeperSerializer
-
-
-class RelativePositionViewSet(BaseViewSet):
-    queryset = RelativePosition.objects.all()
-    serializer_class = RelativePositionSerializer

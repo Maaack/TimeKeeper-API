@@ -28,17 +28,6 @@ class Position(BaseModel, RawTitle):
     axis = models.ForeignKey('Axis')
     value = models.FloatField(_('Value'), default=0, db_index=True)
 
-
-class RelativePosition(Position):
-    class Meta:
-        verbose_name = _("Relative Position")
-        verbose_name_plural = _("Relative Positions")
-        ordering = ["-created"]
-        default_related_name = 'relative_positions'
-
-    relative_to = models.ForeignKey('Position')
-
-
 class Note(BaseModel):
     class Meta:
         verbose_name = _("Note")
