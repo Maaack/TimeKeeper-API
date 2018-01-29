@@ -14,63 +14,12 @@ class TimelineViewSet(BaseViewSet):
     serializer_class = TimelineSerializer
 
 
-class TimeViewSet(BaseViewSet):
-    queryset = Time.objects.all()
-    serializer_class = TimeSerializer
-
-
-class TimeLinkViewSet(BaseViewSet):
-    queryset = TimeLink.objects.all()
-    serializer_class = TimeLinkSerializer
-
 
 class TimeKeeperViewSet(BaseViewSet):
     queryset = TimeKeeper.objects.all()
     serializer_class = TimeKeeperSerializer
 
 
-class EventViewSet(BaseViewSet):
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer
-
-
-class ActionViewSet(BaseViewSet):
-    queryset = Action.objects.all()
-    serializer_class = ActionSerializer
-
-
-class ActivityViewSet(BaseViewSet):
-    queryset = Activity.objects.all()
-    serializer_class = ActivitySerializer
-
-
-class PerspectiveViewSet(BaseViewSet):
-    queryset = Perspective.objects.all()
-    serializer_class = PerspectiveSerializer
-
-
-class ElementViewSet(BaseViewSet):
-    queryset = Element.objects.all()
-    serializer_class = ElementSerializer
-
-
-class ActorViewSet(BaseViewSet):
-    queryset = Actor.objects.all()
-    serializer_class = ActorSerializer
-
-
-class SetViewSet(BaseViewSet):
-    queryset = Set.objects.all()
-    serializer_class = SetSerializer
-
-
 class RelativePositionViewSet(BaseViewSet):
     queryset = RelativePosition.objects.all()
     serializer_class = RelativePositionSerializer
-
-
-class AliasViewSet(BaseViewSet):
-    queryset = Alias.objects.all()
-    serializer_class = AliasPositionSerializer
-
-
