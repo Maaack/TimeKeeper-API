@@ -23,7 +23,7 @@ Django-based REST API
 `timelines` has most of the meat. API is accessible in both readable HTML or JSON.
 
 # Additional Resources
-Writing your first Django App Tutorials: https://docs.djangoproject.com/en/1.10/intro/tutorial01/
+Writing your first Django App Tutorials: https://docs.djangoproject.com/en/2.0/intro/tutorial01/
 
 Django REST framework Documentation: http://www.django-rest-framework.org/
 
