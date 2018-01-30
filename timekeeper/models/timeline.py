@@ -28,7 +28,7 @@ class Position(BaseModel, RawTitle):
     axis = models.ForeignKey('Axis', models.CASCADE)
     value = models.FloatField(_('Value'), default=0, db_index=True)
 
-class Note(BaseModel):
+class Note(BaseModel, RawText):
     class Meta:
         verbose_name = _("Note")
         verbose_name_plural = _("Notes")

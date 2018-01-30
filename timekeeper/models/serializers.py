@@ -37,7 +37,7 @@ class PositionSerializer(BaseModelSerializer):
 class NoteSerializer(BaseModelSerializer):
     class Meta:
         model = Note
-        fields = ('id', 'created', 'updated', 'user', 'positions')
+        fields = ('id', 'created', 'updated', 'user', 'positions', 'raw_text', 'text', 'snippet')
 
 
 class TimelineSerializer(BaseModelSerializer, RawTitleSerializer):

@@ -55,7 +55,7 @@ class RawText(models.Model):
     class Meta:
         abstract = True
 
-    raw_text = models.TextField(_("Raw Text"))
+    raw_text = models.TextField(_("Raw Text"), blank=True, null=True, default='')
     text = models.TextField(_("Text"), blank=True, null=True, default='')
     snippet = models.CharField(_("Snippet"), max_length=25, blank=True, null=True, default='')
 
