@@ -28,6 +28,18 @@ class AxisSerializer(BaseModelSerializer):
         fields = ('id', 'created', 'updated', 'user', 'maximum_position', 'minimum_position')
 
 
+class PositionSerializer(BaseModelSerializer):
+    class Meta:
+        model = Position
+        fields = ('id', 'created', 'updated', 'user',  'raw_title', 'title', 'axis', 'value')
+
+
+class NoteSerializer(BaseModelSerializer):
+    class Meta:
+        model = Note
+        fields = ('id', 'created', 'updated', 'user', 'positions')
+
+
 class TimelineSerializer(BaseModelSerializer, RawTitleSerializer):
     class Meta:
         model = Timeline

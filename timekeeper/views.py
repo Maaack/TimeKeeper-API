@@ -22,3 +22,13 @@ class TimeKeeperViewSet(BaseViewSet):
 class AxisViewSet(BaseViewSet):
     queryset = Axis.objects.all()
     serializer_class = AxisSerializer
+
+
+class PositionViewSet(BaseViewSet):
+    queryset = Position.objects.all()
+    serializer_class = PositionSerializer
+
+
+class NoteViewSet(BaseViewSet):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
