@@ -1,9 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import (Timeline, Axis, Position,
-                     Note,
-                     TimeKeeper)
+from .models import Axis, Position, Note, Timeline, TimeKeeper
 
 admin.site.register(Timeline)
 admin.site.register(Axis)

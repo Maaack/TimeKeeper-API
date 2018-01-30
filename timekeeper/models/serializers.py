@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from . import (Timeline,
-               TimeKeeper)
+from . import Axis, Position, Note, Timeline, TimeKeeper
 
 
 class BaseModelSerializer(serializers.HyperlinkedModelSerializer):
@@ -21,6 +20,12 @@ class RawTextSerializer(serializers.ModelSerializer):
     class Meta:
         abstract = True
         fields = ('id', 'raw_text', 'text')
+
+
+class AxisSerializer(BaseModelSerializer):
+    class Meta:
+        model = Axis
+        fields = ('id', 'created', 'updated', 'user', 'maximum_position', 'minimum_position')
 
 
 class TimelineSerializer(BaseModelSerializer, RawTitleSerializer):

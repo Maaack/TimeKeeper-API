@@ -14,7 +14,11 @@ class TimelineViewSet(BaseViewSet):
     serializer_class = TimelineSerializer
 
 
-
 class TimeKeeperViewSet(BaseViewSet):
     queryset = TimeKeeper.objects.all()
     serializer_class = TimeKeeperSerializer
+
+
+class AxisViewSet(BaseViewSet):
+    queryset = Axis.objects.all()
+    serializer_class = AxisSerializer
