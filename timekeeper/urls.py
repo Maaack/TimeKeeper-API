@@ -1,4 +1,5 @@
-from django.conf.urls import url, include
+from django.urls import path
+from django.conf.urls import include
 from timekeeper import views
 from rest_framework import routers
 
@@ -9,5 +10,5 @@ router.register(r'axe', views.AxisViewSet)
 
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    path('', include(router.urls)),
 ]
