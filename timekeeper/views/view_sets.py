@@ -1,11 +1,5 @@
-from django.shortcuts import render
-
-# Create your views here.
-from .models.serializers import *
-
-from rest_framework.response import Response
-from rest_framework.decorators import detail_route
-from timekeeperapi.mixins.views import BaseViewSet
+from .serializers import *
+from timekeeperapi.mixins.view_sets import BaseViewSet
 
 
 # Create your views here.
