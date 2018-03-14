@@ -1,10 +1,7 @@
 from django.http import HttpResponse
-from rest_framework.renderers import JSONRenderer
 from rest_framework import status
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
-from rest_framework.viewsets import ModelViewSet
 
 
 class JSONResponse(HttpResponse):
@@ -48,31 +45,3 @@ def default_process_detail_request(request, serializer_class, object_instance):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class BaseListView(ListCreateAPIView):
-    """
-    List all object instances, or create a new object instance.
-    """
-    permission_classes = (AllowAny,)
-
-    class Meta:
-        abstract = True
-
-
-class BaseDetailView(RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve, update or delete an object instance.
-    """
-    permission_classes = (AllowAny,)
-
-    class Meta:
-        abstract = True
-
-
-class BaseViewSet(ModelViewSet):
-    """
-    Retrieve, update or delete an object instance.
-    """
-    permission_classes = (AllowAny,)
-
-    class Meta:
-        abstract = True
